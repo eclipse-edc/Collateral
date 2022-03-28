@@ -18,10 +18,9 @@ the Eclipse Dataspace Connector (EDC) yourself.
 
 Please feel free to add content. However, by doing so, please pay attention to comply to the 
 following guidelines:
-- The date of folder and file names have to match the following pattern: YYYY-MM-DD. Just take a 
-  look at the already uploaded files.
-  - Files should provide information about the concrete day.
-  - Folders should be named by year and month: YYYY-MM.
+- The date of folder and file names have to match the following patterns:
+  - Files should provide information about the concrete day (YYYY-MM-DD).
+  - Folders should be named by year and month (YYYY-MM).
 - Files (e.g. presentation slides) of one event are located within a folder for this specific event.
 - Always add a file in the raw format (e.g., `.pptx`) **and** a finalized one (`.pdf`).
 
