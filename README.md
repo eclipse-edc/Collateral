@@ -10,7 +10,9 @@ the Eclipse Dataspace Connector (EDC) yourself.
   - [Conferences](Events/Conferences): e.g. EclipseCon, EDC Conference, IDSA Events
   - [Hackathons](Events/Hackathons): e.g. Gaia-X or EDC Hackathons
   - [Workshops](Events/Workshops)
-- [Latest Presentations](Latest%20Presentations)
+- [Latest Presentations](Latest%20Presentations): general slides
+- [Work Content](Work%20Content): topic-specific discussion results and working material
+  - [Usage Control](Work%20Content/Usage%20Control)
 
 ## Contributing
 
