@@ -1,29 +1,20 @@
 # Collateral
 
-This repository provides access to the latest presentations and events. This way, you can take a 
-look at the slides if you missed an event, or use the content if you want to do a presentation about 
-the Eclipse Dataspace Connector (EDC) yourself.
+This repository provides access to the latest presentations and events, and working materials that
+are not that related to the code to be placed in the [main repository](https://github.com/eclipse-dataspaceconnector/DataSpaceConnector).
+Some content may be moved to the main or the [publications repository](https://github.com/eclipse-dataspaceconnector/Publications)
+depending on further adoption.
 
 ## Structure
 
 - [Events](Events)
-  - [Conferences](Events/Conferences): e.g. EclipseCon, EDC Conference, IDSA Events
-  - [Hackathons](Events/Hackathons): e.g. Gaia-X or EDC Hackathons
-  - [Workshops](Events/Workshops)
-- [Latest Presentations](Latest%20Presentations): general slides
+  - [Conferences](Events/Conferences): EclipseCon, EDC Conference, IDSA Events
+  - [Hackathons](Events/Hackathons): Gaia-X or EDC Hackathons
+  - [Workshops](Events/Workshops): IDSA Plugfest
+- [Latest Presentations](Latest%20Presentations)
 - [Work Content](Work%20Content): topic-specific discussion results and working material
   - [Usage Control](Work%20Content/Usage%20Control)
 
 ## Contributing
 
-Please feel free to add content. However, by doing so, please pay attention to comply to the 
-following guidelines:
-- The date of folder and file names have to match the following patterns:
-  - Files should provide information about the concrete day (YYYY-MM-DD).
-  - Folders should be named by year and month (YYYY-MM).
-- Files (e.g. presentation slides) of one event are located within a folder for this specific event.
-- Always add a file in the raw format (e.g., `.pptx`) **and** a finalized one (`.pdf`).
-
-This way, people can access information fast and (hopefully) without too much effort. All files are
-automatically sorted by alphabet and number, so the aforementioned naming style allows finding
-events according to their date real quick.
+See [how to contribute](CONTRIBUTING.md).
