@@ -18,6 +18,7 @@ Usage Control is a concept to expand data protection from the provider system to
 Due to the complexity of the topic and the huge amount of influencing factors, a matrix structure is outlined in the following to organise the various aspects. The relevant topics are grouped in _viewpoints_, each regarding a dedicated set of _concerns_, which have been introduced through identified _stakeholders_. This approach follows roughly the recommendations of ISO/IEC 42010 and uses its terminology in the following.
 
 ![Viewpoints](diagrams/usage_control_viewpoints.png)
+
 *Matrix of horizontal and vertical viewpoints of Usage Control.*
 
 Separating the concerns and to simplify the following discussion, the interdependencies of the horizontal viewpoints are mostly limited to the direct neighbors. The vertical viewpoints, however, affect all horizontal ones. For instance, the horizontal viewpoint _Technical Communication_ mostly affects and is affected by the _Business Interactions_ and the _Contract Representation_ as well as the descriptions in all vertical viewpoints.
