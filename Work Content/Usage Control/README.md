@@ -22,3 +22,12 @@ Due to the complexity of the topic and the huge amount of influencing factors, a
 *Matrix of horizontal and vertical viewpoints of Usage Control.*
 
 Separating the concerns and to simplify the following discussion, the interdependencies of the horizontal viewpoints are mostly limited to the direct neighbors. The vertical viewpoints, however, affect all horizontal ones. For instance, the horizontal viewpoint _Technical Communication_ mostly affects and is affected by the _Business Interactions_ and the _Contract Representation_ as well as the descriptions in all vertical viewpoints.
+
+
+## Business Viewpoint
+
+### Roles: Organizations, Human and Technical Users
+
+Contracts are negotiated in principle between legal entities. In the case of the EDC, that implies that organisations are the anchors of any ContractOffer or ContractAgreement, therefore, only organisations possess or grant usage rights. Nevertheless, policies need to provide the expressiveness to further restrict the potential users of an Asset. If for instance Company A grants its business partner Company B access to their production plan, Company A usually wants to prohibit that every employee of Company B can see it. Consequently, the ContractAgreement between Company A and Company B need a Constraint describing the allowed endusers.
+
+The EDC fulfills this requirement by ... <!-- TODO: Explain the solution. -->
