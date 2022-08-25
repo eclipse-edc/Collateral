@@ -14,7 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     continue-on-error: false
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: deepakputhraya/action-pr-title@master
         with:
           # Match pull request titles conventional commit syntax (https://www.conventionalcommits.org/en/v1.0.0/)
@@ -22,11 +22,13 @@ jobs:
           #
           # Valid examples would be
           # - fix: resolve minor issue
-          # - assetindex: update some dependency
-          # - docs(sample5): update docs for configuration
+          # - docs(Sample5): update docs for configuration
           # - feat(management-api)!: change path to access contract agreements
           #
           # Invalid examples would be
           # - Add cool feature
           # - Feature/some cool improvement
-          regex: '(?<type>\w+)(?<scope>(?:\([^()\r\n]*\)|\()?(?<breaking>!)?):(?<subject>.*)?'
+          # - fix: resolve minor issue.
+          regex: '^(build|chore|ci|docs|feat|fix|perf|refactor|revert|style|test)(\(\w+((,|\/|\\)?\s?\w+)+\))?!?: [\S ]{1,80}[^\.]$'
+          allowed_prefixes: 'build,chore,ci,docs,feat,fix,perf,refactor,revert,style,test'
+          prefix_case_sensitive: true
