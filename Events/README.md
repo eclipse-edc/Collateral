@@ -3,6 +3,10 @@
 You may take a look at the slides if you missed an event, or use the content if you want to do a 
 presentation about the Eclipse Dataspace Connector (EDC) yourself.
 
+- [Conferences](Conferences/): e.g., EclipseCon, EDC Conference, IDSA Events
+- [Hackathons](Hackathons/): e.g., Gaia-X and EDC Hackathons
+- [Workshops](Workshops/): e.g., IDSA Plugfest
+
 ## Contributing
 
 Please feel free to add content. However, by doing so, please pay attention to comply to the
