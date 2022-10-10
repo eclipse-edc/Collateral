@@ -22,7 +22,8 @@
 |           |                                   | EDC Gaia-X TrustFramework Self-Description | [link](https://github.com/eclipse-dataspaceconnector/Collateral/raw/main/Events/Hackathons/2022-03%20Gaia-X%20Hackathon%20No.%203/2022-03-29%20EDC_GaiaxTF%20SelfDescription.pdf)
 | 2022-06   | Gaia-X Hackathon No. 4            | GAIA-X Hackathon #4 | [link](https://gaia-x.eu/event/gaia-x-hackathon-4/)
 |           |                                   | Minimum Viable Dataspace | [link](https://github.com/eclipse-dataspaceconnector/MinimumViableDataspace/)
-| 2022-09   | Gaia-X Hackathon No. 5           | GAIA-X Hackathon #5 | [link](https://gaia-x.eu/event/gaia-x-hackathon-5/)
+| 2022-09   | Gaia-X Hackathon No. 5           | Offical GAIA-X Hackathon #5 proposal | [link](https://gaia-x.eu/event/gaia-x-hackathon-5/)
+|           |                                   | GAIA-X #5 Hackathon EDC Presentation  | [link](/Collateral/blob/main/Events/Hackathons/2022-09%20Gaia-X%20Hackathon%20No.%205/GAIA-X%205thHack-09-EDC-MVD.pdf)
 |           |                                   | MVD Updates - local deployment and easier CI/CD Pipelines  | [link](https://github.com/eclipse-dataspaceconnector/MinimumViableDataspace/)
-|           |                                   | Hackathon Presentation  | [link](https://github.com/eclipse-dataspaceconnector/MinimumViableDataspace/)
- 
+ |           |                                   | Dataspace Management Vision  | [link](https://aka.ms/dataspace-vision)
+  |           |                                   | Architect Decision Record for **GAIA-X Self-Description** for EDC MVD  | [link](https://github.com/eclipse-dataspaceconnector/MinimumViableDataspace/issues/86)
