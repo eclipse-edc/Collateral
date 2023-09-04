@@ -1,0 +1,93 @@
+@startuml
+
+skinParam NoteBackgroundColor WhiteSmoke
+skinParam NoteFontColor Black
+skinParam ParticipantBackgroundColor WhiteSmoke
+skinParam ActorBackgroundColor WhiteSmoke
+skinParam AgentBackgroundColor White
+skinParam AgentBorderColor SkyBlue
+skinparam shadowing false
+skinparam BoxPadding 10
+
+!define ParticipantAColor f8f2ff
+!define ParticipantBColor d9edff
+!define VCIssuersColor D5F5E3
+!define DataspaceAuthorityColor FCF3CF
+!define WarningColor Business
+!define LeadColor Technology
+
+autonumber
+
+box "VC Issuers" #VCIssuersColor
+    participant VcIssuersDidServer as "DID server"
+end box
+
+box "Participant A applications" #ParticipantAColor
+    participant ParticipantAApps as "Ingestion endpoint" #Business
+end box
+
+box "Participant A ecosystem" #ParticipantAColor
+    participant ParticipantADidServer as "DID Server" #Business
+    participant ParticipantAIdentityHub as "Identity Hub" #Business
+    participant ParticipantACatalog as "Federated Catalog" #Business
+    participant ParticipantAControlPlane as "Control Plane" #Business
+    participant ParticipantADataPlane as "Data Plane" #Business
+end box
+
+box "Participant B ecosystem" #ParticipantBColor
+    participant ParticipantBDataPlane as "Data Plane" #Business
+    database ParticipantBTopic as "Topic" #Business
+    participant ParticipantBControlPlane as "Control Plane" #Business
+    participant ParticipantBCatalog as "Federated Catalog" #Business
+    participant ParticipantBIdentityHub as "Identity Hub" #Business
+    participant ParticipantBDidServer as "DID Server" #Business
+end box
+
+autonumber 1
+== Negotiate access to asset ==
+
+ParticipantAControlPlane ->> ParticipantBControlPlane : request access to asset
+activate ParticipantAControlPlane
+activate ParticipantBControlPlane
+group Verify VCs
+    ParticipantBControlPlane ->> ParticipantAIdentityHub : fetch Verifiable Credentials
+    activate ParticipantAIdentityHub
+    ParticipantAIdentityHub -->> ParticipantBControlPlane : return list of VCs
+    deactivate ParticipantAIdentityHub
+    ParticipantBControlPlane ->> ParticipantBControlPlane : resolve issuers\nDID documents
+    ParticipantBControlPlane ->> VcIssuersDidServer : query DID documents
+    activate VcIssuersDidServer
+    VcIssuersDidServer -->> ParticipantBControlPlane : DID document containing VC verification methods
+    deactivate VcIssuersDidServer
+    ParticipantBControlPlane ->> ParticipantBControlPlane : verify VCs and\nenforce policies
+end
+ParticipantBControlPlane ->> ParticipantBControlPlane : generate and\nstore contract
+ParticipantBControlPlane ->> ParticipantAControlPlane : send contract
+ParticipantAControlPlane ->> ParticipantAControlPlane : store contract
+
+group Initiate transfer
+    ParticipantAControlPlane ->> ParticipantBControlPlane : send transfer request (contains the \ningestion endpoint to which events must be pushed)
+    ParticipantBControlPlane ->> ParticipantBControlPlane : verify VCs\n(steps 2 to 7)
+    ParticipantBControlPlane ->> ParticipantBDataPlane : send transfer request
+    ParticipantBDataPlane -->> ParticipantBControlPlane : acknowledge transfer started
+    ParticipantBControlPlane -->> ParticipantAControlPlane : acknowledge transfer started
+end
+
+deactivate ParticipantBControlPlane
+deactivate ParticipantAControlPlane
+
+== Streaming ==
+
+activate ParticipantBDataPlane
+ParticipantBDataPlane ->> ParticipantBDataPlane : starts Kafka\nconsumer
+
+group Streaming loop
+    ParticipantBDataPlane ->> ParticipantBTopic : consumes events
+    activate ParticipantBTopic
+    ParticipantBTopic -->> ParticipantBDataPlane : events
+    deactivate ParticipantBTopic
+    ParticipantBDataPlane ->> ParticipantAApps : push events through http
+    activate ParticipantAApps
+end
+
+@enduml

@@ -1,0 +1,89 @@
+@startuml
+
+skinParam NoteBackgroundColor WhiteSmoke
+skinParam NoteFontColor Black
+skinParam ParticipantBackgroundColor WhiteSmoke
+skinParam ActorBackgroundColor WhiteSmoke
+skinParam AgentBackgroundColor White
+skinParam AgentBorderColor SkyBlue
+skinparam shadowing false
+skinparam BoxPadding 10
+
+!define ParticipantAColor f8f2ff
+!define ParticipantBColor d9edff
+!define VCIssuersColor D5F5E3
+!define DataspaceAuthorityColor FCF3CF
+!define WarningColor Business
+!define LeadColor Technology
+
+autonumber
+
+box "VC Issuers" #VCIssuersColor
+    participant VcIssuersDidServer as "DID server"
+end box
+
+box "Participant A applications" #ParticipantAColor
+    participant ParticipantAApps as "Backend apps" #Business
+end box
+
+box "Participant A ecosystem" #ParticipantAColor
+    participant ParticipantADidServer as "DID Server" #Business
+    participant ParticipantAIdentityHub as "Identity Hub" #Business
+    participant ParticipantACatalog as "Federated Catalog" #Business
+    participant ParticipantAControlPlane as "Control Plane" #Business
+    participant ParticipantADataPlane as "Data Plane" #Business
+end box
+
+box "Participant B ecosystem" #ParticipantBColor
+    participant ParticipantBDataPlane as "Data Plane" #Business
+    participant ParticipantBControlPlane as "Control Plane" #Business
+    participant ParticipantBCatalog as "Federated Catalog" #Business
+    participant ParticipantBIdentityHub as "Identity Hub" #Business
+    participant ParticipantBDidServer as "DID Server" #Business
+end box
+
+autonumber 1
+== Negotiate access to asset ==
+
+ParticipantAControlPlane ->> ParticipantBControlPlane : request access to asset
+activate ParticipantAControlPlane
+activate ParticipantBControlPlane
+group Verify VCs
+    ParticipantBControlPlane ->> ParticipantAIdentityHub : fetch Verifiable Credentials
+    activate ParticipantAIdentityHub
+    ParticipantAIdentityHub -->> ParticipantBControlPlane : return list of VCs
+    ParticipantBControlPlane ->> ParticipantBControlPlane : resolve issuers\nDID documents
+    ParticipantBControlPlane ->> VcIssuersDidServer : query DID documents
+    activate VcIssuersDidServer
+    VcIssuersDidServer -->> ParticipantBControlPlane : DID document containing VC verification methods
+    deactivate VcIssuersDidServer
+    ParticipantBControlPlane ->> ParticipantBControlPlane : verify VCs and\nenforce policies
+end
+ParticipantBControlPlane ->> ParticipantBControlPlane : generate and\nstore contract
+ParticipantBControlPlane ->> ParticipantAControlPlane : send contract
+ParticipantAControlPlane ->> ParticipantAControlPlane : store contract
+
+group Obtain/renew access token (while contract is valid)
+    ParticipantAControlPlane ->> ParticipantBControlPlane : send transfer request (contains the contract id)
+    ParticipantBControlPlane ->> ParticipantBControlPlane : verify VCs\n(steps 2 to 7)
+    ParticipantBControlPlane ->> ParticipantBControlPlane : generate access\ntoken
+    ParticipantBControlPlane -->> ParticipantAControlPlane : send access token
+end
+
+activate ParticipantADataPlane
+deactivate ParticipantAControlPlane
+
+== Access data ==
+
+ParticipantAApps ->> ParticipantADataPlane : query events that occurred since last call
+activate ParticipantAApps
+ParticipantADataPlane ->> ParticipantBDataPlane : query events
+activate ParticipantBDataPlane
+ParticipantBDataPlane ->> ParticipantBControlPlane : validate token and\ncheck contract still valid
+ParticipantBControlPlane -->> ParticipantBDataPlane : tells if token/contract \nare valid
+ParticipantBDataPlane ->> ParticipantBDataPlane : fetch events\nfrom streaming REST API
+ParticipantBDataPlane -->> ParticipantADataPlane : events
+ParticipantADataPlane -->> ParticipantAApps : events
+
+
+@enduml
